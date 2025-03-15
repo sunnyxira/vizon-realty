@@ -1,0 +1,31 @@
+{% load static %}
+
+<section class="section-categories style-2 tf-spacing-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="heading-section text-center mb-48">
+                    <h2 class="title text-anime-wave">Property Type </h2>
+                </div>
+                <div class="swiper style-pagination tf-sw-mobile-1" data-screen="576" data-preview="1" data-space="15">
+                    <div class="swiper-wrapper search-for tf-layout-mobile-sm sm-col-2 xl-col-4 lg-col-3">
+                        {% for service in services %}
+                        <div class="swiper-slide">
+                            <a href="{% url 'service_detail' service.slug %}" class="categories-item style-2">
+                                <div class="icon-box">
+                                    <img src="{{ service.icon.url }}" alt="">
+                                </div>
+                                <div class="content ">
+                                    <h5>{{ service.name }}</h5>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

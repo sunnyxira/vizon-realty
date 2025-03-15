@@ -1,0 +1,91 @@
+{% load static %}
+{% load custom_filters  %}
+
+<section class="section-categories-neighborhoods  tf-spacing-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="heading-section text-center mb-48">
+                    <h2 class="title text-anime-wave">Explore Property Categories</h2>
+                    <p class="text-1 wow animate__fadeInUp animate__animated" data-wow-duration="1.5s"
+                        data-wow-delay="0s">We connect you directly to the person that knows the
+                        most
+                        about a
+                        property for sale, the <br> listing agent.
+                    </p>
+                </div>
+                <div class="swiper sw-layout-3 style-pagination " data-preview="4" data-tablet="4"
+                    data-mobile-sm="2" data-mobile="1" data-space="15" data-space-md="30" data-space-lg="40"
+                    data-speed="1000">
+                    <div class="swiper-wrapper mb-48 wrap-neighborhoods">
+                        {% for hf in homefeed %}
+                        <div class="swiper-slide">
+                            <div class="box-location h-450 hover-img ">
+                                <div class="image-wrap">
+                                    <a href="{% url 'property_list' slug=hf.slug %}">
+                                        <img class="lazyload" data-src="{{ hf.image.url }}" src="{{ hf.image.url }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <h6 class="text-white">{{ hf.name }}</h6>
+                                    <a href="#"
+                                        class="text-1 tf-btn style-border pd-23 text-white  tf-btn style-border pd-23">{{ hf.total_properties }}
+                                        Properties <i class="icon-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <div class="sw-wrap-btn">
+                        <div class="swiper-button-prev sw-button layout-3-prev">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 12H5" stroke="#5C5E61" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 5L5 12L12 19" stroke="#5C5E61" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="sw-pagination sw-pagination-layout-3 text-center"></div>
+                        <div class="swiper-button-next sw-button layout-3-next">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19" stroke="#5C5E61" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 5L19 12L12 19" stroke="#5C5E61" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-listing mb-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="heading-section text-center mb-48">
+                    <h2 class="title text-anime-wave">Featured Properties</h2>
+                </div>
+                <div class="swiper sw-layout-4-v3 style-pagination " data-preview="4" data-desktop="3" data-tablet="2" data-mobile-sm="1" data-mobile="1" data-space="15" data-space-md="30" data-space-lg="40" data-speed="1000">
+                    <div class="swiper-wrapper mb-44">
+                        {% for property in properties %}
+                            <div class="swiper-slide">
+                                <div class="box-house hover-img ">
+                                    {% include 'property/common-list.html' %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="sw-pagination sw-pagination-layout-4 text-center"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,100 @@
+{% load static %}
+{% load custom_filters %}
+
+
+    <div class="box">
+        <div class="card" data-animate="fadeInUp">
+            <div class="hover-change-image bg-hover-overlay rounded-lg card-img-top">
+                {% with property.images.first as first_image %} 
+                    {% if first_image.image %}
+                        <img src="{{ first_image.image.url }}" class="image-slider-fit" alt="{{ property.title }}">
+                    {% else %}
+                        <img src="{% static 'images/samples/' %}{% random_number 1 8 %}.jpg" class="image-slider-fit" alt="{{ property.title }}">
+                    {% endif %} 
+                {% endwith %}
+                <div class="card-img-overlay p-2 d-flex flex-column">
+                    <div class="mt-auto d-flex hover-image">
+                        <ul class="list-inline mb-0 d-flex align-items-end mr-auto">
+                            <li class="list-inline-item mr-2" data-toggle="tooltip" title="9 Images">
+                                <a href="#" class="text-white hover-primary">
+                                    <i class="far fa-images"></i><span class="pl-1">9</span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item" data-toggle="tooltip" title="2 Video">
+                                <a href="#" class="text-white hover-primary">
+                                    <i class="far fa-play-circle"></i><span class="pl-1">2</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="list-inline mb-0 d-flex align-items-end mr-n3">
+                            <li class="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Wishlist">
+                                <a href="#" class="text-white fs-20 hover-primary">
+                                    <i class="far fa-heart"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header bg-transparent d-flex justify-content-between align-items-center py-3">
+                <p class="fs-17 font-weight-bold text-heading mb-0">
+                    {% if property.is_project_based %}
+                        {% if property.project.rough_price_range %}
+                            ₹ {{ property.project.rough_price_range|number_format }}
+                        {% else %}
+                            Request Price
+                        {% endif %}
+                    {% else %}
+                        {% if property.price %}
+                            ₹ {{ property.price|number_format }}
+                        {% else %}
+                            Request Price
+                        {% endif %}
+                    {% endif %}
+
+                </p>
+                {% for tag in property.tags.all %}
+                    <span class="badge badge-indigo"  style="background: {{ tag.color }}">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+            <div class="card-body py-2">
+                <div class="row"></div>
+                <h2 class="fs-16 lh-2 mb-0">
+                    <a href="{% url 'property_detail' uniqueid=property.listing_id slug=property.slug %}" class="text-dark hover-primary">
+                        {{ property.title|unslug }}
+                    </a>
+                </h2>
+                <p class="font-weight-500 text-gray-light mb-0">{{ property.location }}</p>
+            </div>
+            <div class="card-footer bg-transparent pt-3 pb-4">
+                <ul class="list-inline d-flex justify-content-between mb-0 flex-wrap">
+                    {% if property.bedrooms %}
+                    <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="3 Bedroom">
+                        <svg class="icon icon-bedroom fs-18 text-primary mr-1">
+                            <use xlink:href="#icon-bedroom"></use>
+                        </svg>
+                        {{ property.bedrooms }}
+                    </li>
+                    {% endif %}
+                    {% if property.bathrooms %}
+                    <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="3 Bathrooms">
+                        <svg class="icon icon-shower fs-18 text-primary mr-1">
+                            <use xlink:href="#icon-shower"></use>
+                        </svg>
+                        {{ property.bathrooms }}
+                    </li>
+                    {% endif %}
+                    <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="Size">
+                        <svg class="icon icon-square fs-18 text-primary mr-1">
+                            <use xlink:href="#icon-square"></use>
+                        </svg>
+                        {% if property.is_project_based %}
+                            {{ property.project.project_size|size_format }}
+                        {% else %}
+                            {{ property.total_area|size_format }} Sqft
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

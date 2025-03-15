@@ -1,0 +1,28 @@
+{% load static %}
+{% load custom_filters %}
+
+{% if floor_plans %}
+<div class="wg-property single-property-floor spacing-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs">
+                {% for plan in floor_plans %}
+                <button class="tab-btn {% if forloop.first %}active{% endif %}" data-tab="tab-{{ forloop.counter }}">
+                    {{ plan.name }}
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="tab-content">
+                {% for plan in floor_plans %}
+                <div id="tab-{{ forloop.counter }}" class="tab-pane {% if forloop.first %}active{% endif %}">
+                    <img src="{{ plan.file.url }}" width="100%" alt="{{ plan.name }}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endif %}

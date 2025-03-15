@@ -1,0 +1,441 @@
+{% load static %}
+{% load custom_filters %}
+<div class="tf-top-bar">
+    <div class="container xl">
+        <div class="row">
+            <div class="col-12">
+                <div class="top-bar-inner">
+                    <ul class="top-bar-info">
+                        <li>
+                            <i class="icon-phone-1"></i>
+                            <p>Phone: <span class="fw-7">+91-7874036028</span></p>
+                        </li>
+                        <li>
+                            <i class="icon-mail"></i>
+                            <p>Email: <span class="fw-7"><a href="#">info@vizonrealty.com</a></span></p>
+                        </li>
+                    </ul>
+                    <div class="wrap-social">
+                        <ul class="tf-social  style-2">
+                            <li>
+                                <a href="#">
+                                    <i class="icon-fb"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-X"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-linked"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-ins"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- /.tf-top-bar -->
+
+<header id="header-main" class="header style-4 header-fixed">
+    <div class="header-inner">
+        <div class="container xl">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header-inner-wrap">
+                        <div class="header-logo">
+                            <a href="{% url 'home' %}" class="site-logo">
+                                <img id="logo_header" alt="" src="{% static 'images/logo/logo.png' %}">
+                            </a>
+                        </div>
+                        <nav class="main-menu">
+                            <ul class="navigation ">
+                                <li class="current-menu"><a href="#">Home</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li class="has-child"><a href="#">Properties</a>
+                                    <ul class="submenu">
+                                        {% for category in property_categories %}
+                                        <li class="has-child"><a href="#">{{ category.name }}</a>
+                                            <ul class="submenu">
+                                                {% for subcategory in category.subcategories.all %}
+                                                {% if subcategory.property_set.all.count > 0 %}
+                                                <li>
+                                                    <a href="{% url 'property_list' slug=subcategory.slug %}">
+                                                        {{ subcategory.name }}
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+
+                                <li><a href="/services">Services</a>
+                                    <!-- <ul class="submenu">
+                                        <li><a href="#">Blog List</a></li>
+                                    </ul> -->
+                                </li>
+                                <!-- <li><a href="#">Career</a></li> -->
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header-right">
+                            {% if request.user.is_authenticated %}
+                            <div class="box-user tf-action-btns">
+                                <div class="user ">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M15.749 6C15.749 6.99456 15.3539 7.94839 14.6507 8.65165C13.9474 9.35491 12.9936 9.75 11.999 9.75C11.0044 9.75 10.0506 9.35491 9.34735 8.65165C8.64409 7.94839 8.249 6.99456 8.249 6C8.249 5.00544 8.64409 4.05161 9.34735 3.34835C10.0506 2.64509 11.0044 2.25 11.999 2.25C12.9936 2.25 13.9474 2.64509 14.6507 3.34835C15.3539 4.05161 15.749 5.00544 15.749 6ZM4.5 20.118C4.53213 18.1504 5.33634 16.2742 6.73918 14.894C8.14202 13.5139 10.0311 12.7405 11.999 12.7405C13.9669 12.7405 15.856 13.5139 17.2588 14.894C18.6617 16.2742 19.4659 18.1504 19.498 20.118C17.1454 21.1968 14.5871 21.7535 11.999 21.75C9.323 21.75 6.783 21.166 4.5 20.118Z"
+                                            stroke="#2C2E33" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="name">
+                                    {{ request.user.username }}
+                                    <i class="icon-CaretDown"></i>
+                                </div>
+                                <div class=" menu-user">
+                                    <a class="dropdown-item" href="/profile">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M15 15C16.3807 15 17.5 13.8807 17.5 12.5C17.5 11.1193 16.3807 10 15 10C13.6193 10 12.5 11.1193 12.5 12.5C12.5 13.8807 13.6193 15 15 15Z"
+                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M7.5013 9.16667C9.34225 9.16667 10.8346 7.67428 10.8346 5.83333C10.8346 3.99238 9.34225 2.5 7.5013 2.5C5.66035 2.5 4.16797 3.99238 4.16797 5.83333C4.16797 7.67428 5.66035 9.16667 7.5013 9.16667Z"
+                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M8.33464 12.5H5.0013C4.11725 12.5 3.2694 12.8512 2.64428 13.4763C2.01916 14.1014 1.66797 14.9493 1.66797 15.8333V17.5"
+                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M18.082 13.6666L17.332 13.4166" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M12.668 11.5834L11.918 11.3334" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.832 15.5834L14.082 14.8334" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M15.918 10.1666L16.168 9.41663" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M16.3333 15.5833L16 14.75" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M14.0013 10.25L13.668 9.41663" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M11.918 13.8333L12.7513 13.5" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M17.25 11.5L18.0833 11.1666" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        My profile</a>
+                                    <a class="dropdown-item" href="#">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12.082 18.3333H14.9987C15.4407 18.3333 15.8646 18.1577 16.1772 17.8451C16.4898 17.5326 16.6654 17.1087 16.6654 16.6666V5.83329L12.4987 1.66663H4.9987C4.55667 1.66663 4.13275 1.84222 3.82019 2.15478C3.50763 2.46734 3.33203 2.89127 3.33203 3.33329V6.66663"
+                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M11.668 1.66663V4.99996C11.668 5.44199 11.8436 5.86591 12.1561 6.17847C12.4687 6.49103 12.8926 6.66663 13.3346 6.66663H16.668"
+                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M2.49828 10.9167C2.24146 11.0649 2.02884 11.279 1.88235 11.5368C1.73587 11.7946 1.66082 12.0868 1.66494 12.3833V15.0833C1.65529 15.3802 1.72514 15.6742 1.86726 15.935C2.00937 16.1958 2.2186 16.4139 2.47328 16.5667L4.99828 18.0833C5.25385 18.2356 5.5455 18.3166 5.84297 18.3181C6.14044 18.3195 6.43288 18.2414 6.68994 18.0917L9.16494 16.5833C9.42176 16.4351 9.63438 16.221 9.78087 15.9632C9.92735 15.7054 10.0024 15.4132 9.99828 15.1167V12.4167C10.0079 12.1198 9.93808 11.8258 9.79596 11.565C9.65385 11.3042 9.44462 11.0861 9.18994 10.9333L6.66494 9.41666C6.40937 9.26442 6.11771 9.18337 5.82025 9.1819C5.52278 9.18044 5.23033 9.25862 4.97328 9.40832L2.49828 10.9167Z"
+                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M5.83203 14.1666V18.3333" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M9.7513 11.8334L5.83464 14.1667L1.91797 11.8334" stroke="#A8ABAE"
+                                                stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        My properties
+                                    </a>
+                                    <a class="dropdown-item" href="/logout">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.5 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V4.16667C2.5 3.72464 2.67559 3.30072 2.98816 2.98816C3.30072 2.67559 3.72464 2.5 4.16667 2.5H7.5"
+                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M13.332 14.1667L17.4987 10L13.332 5.83337" stroke="#A8ABAE"
+                                                stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M17.5 10H7.5" stroke="#A8ABAE" stroke-width="1.4"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        Logout</a>
+                                </div>
+                                {% else %}
+                                <div class="name">
+                                    <a href="/login">Login</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="btn-add">
+                                <a class="tf-btn style-border pd-23" href="#">Add property</a>
+                            </div>
+                            <div class="mobile-button" data-bs-toggle="offcanvas" data-bs-target="#menu-mobile"
+                                aria-controls="menu-mobile">
+                                <i class="icon-menu"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="offcanvas offcanvas-start mobile-nav-wrap " tabindex="-1" id="menu-mobile" aria-labelledby="menu-mobile">
+    <div class="offcanvas-header top-nav-mobile">
+        <div class="offcanvas-title">
+            <a href="{% url 'home' %}"><img src="{% static 'images/logo/logo.png' %}" alt=""></a>
+        </div>
+        <div data-bs-dismiss="offcanvas" aria-label="Close">
+            <i class="icon-close"></i>
+        </div>
+    </div>
+    <div class="offcanvas-body inner-mobile-nav">
+        <div class="mb-body">
+            <ul id="menu-mobile-menu">
+                <li class="menu-item menu-item-has-children-mobile current-menu-item">
+                    <a href="#dropdown-menu-one" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
+                        aria-expanded="true" aria-controls="dropdown-menu-one">
+                        Home
+                    </a>
+                    <div id="dropdown-menu-one" class="collapse" data-bs-parent="#menu-mobile-menu">
+                        <ul class="sub-mobile ">
+                            <li class="menu-item current-item"><a href="{% url 'home' %}">Home Page 01</a></li>
+                            <li class="menu-item"><a href="home02.html">Home Page 02</a></li>
+                            <li class="menu-item"><a href="home03.html">Home Page 03</a></li>
+                            <li class="menu-item"><a href="home04.html">Home Page 04</a></li>
+                            <li class="menu-item"><a href="home05.html">Home Page 05</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-has-children-mobile">
+                    <a href="#dropdown-menu-two" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
+                        aria-expanded="true" aria-controls="dropdown-menu-two">
+                        Listing
+                    </a>
+                    <div id="dropdown-menu-two" class="collapse" data-bs-parent="#menu-mobile-menu">
+                        <ul class="sub-mobile">
+                            <li class="menu-item menu-item-has-children-mobile-2">
+                                <a href="#sub-layout" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                    aria-expanded="true" aria-controls="sub-agents">Layout</a>
+                                <div id="sub-layout" class="collapse" data-bs-parent="#dropdown-menu-two">
+                                    <ul class="sub-mobile">
+                                        <li class="menu-item ">
+                                            <a href="property-grid-full-width.html" class="item-menu-mobile ">Grid
+                                                Style - Full Width</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-gird-top-search.html" class="item-menu-mobile ">Grid
+                                                Style - Top Search</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-gird-left-sidebar.html" class="item-menu-mobile ">Grid
+                                                Style - Sidebar Left</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-gird-right-sidebar.html" class="item-menu-mobile ">
+                                                Grid Style - Sidebar Right</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-list-full-width.html" class="item-menu-mobile "> List
+                                                Style - Full Width</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-list-top-search.html" class="item-menu-mobile "> List
+                                                Style - Top Search</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-list-left-sidebar.html" class="item-menu-mobile ">List
+                                                Style - Sidebar Left</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-list-right-sidebar.html" class="item-menu-mobile ">
+                                                List Style - Sidebar Right</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item menu-item-has-children-mobile-2">
+                                <a href="#sub-feaure" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                    aria-expanded="true" aria-controls="sub-agents">Feature</a>
+                                <div id="sub-feaure" class="collapse" data-bs-parent="#dropdown-menu-two">
+                                    <ul class="sub-mobile">
+                                        <li class="menu-item">
+                                            <a href="property-half-map-grid.html">Property Half Map Grid</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="property-half-map-list.html">Property Half Map List</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="property-half-top-map.html">Property Half Top Map</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-filter-popup.html" class="item-menu-mobile ">
+                                                Property Filter Popup</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-filter-popup-left.html" class="item-menu-mobile ">Property
+                                                Filter Popup Left</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="property-filter-popup-right.html" class="item-menu-mobile ">
+                                                Property Filter Popup Right</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item menu-item-has-children-mobile-2">
+                                <a href="#sub-details" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                    aria-expanded="true" aria-controls="sub-agents">Listing Details</a>
+                                <div id="sub-details" class="collapse" data-bs-parent="#dropdown-menu-two">
+                                    <ul class="sub-mobile">
+                                        <li class="menu-item">
+                                            <a href="property-detail-v1.html">Property Details 1</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="property-detail-v2.html">Property Details 2</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="property-detail-v3.html">Property Details 3</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="property-detail-v4.html">Property Details 4</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="property-detail-v5.html">Property Details 5</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-has-children-mobile">
+                    <a href="#dropdown-menu-four" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
+                        aria-expanded="true" aria-controls="dropdown-menu-four">
+                        Pages
+                    </a>
+                    <div id="dropdown-menu-four" class="collapse" data-bs-parent="#menu-mobile-menu">
+                        <ul class="sub-mobile">
+                            <li class="menu-item menu-item-has-children-mobile-2">
+                                <a href="#sub-agents" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                    aria-expanded="true" aria-controls="sub-agents">Agents</a>
+                                <div id="sub-agents" class="collapse" data-bs-parent="#dropdown-menu-four">
+                                    <ul class="sub-mobile">
+                                        <li class="menu-item ">
+                                            <a href="agents.html" class="item-menu-mobile "> Agents</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="agents-details.html" class="item-menu-mobile "> Agnet
+                                                Details</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item menu-item-has-children-mobile-2">
+                                <a href="#sub-agency" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                    aria-expanded="true" aria-controls="sub-agency">Agencies</a>
+                                <div id="sub-agency" class="collapse" data-bs-parent="#dropdown-menu-four">
+                                    <ul class="sub-mobile">
+                                        <li class="menu-item ">
+                                            <a href="agency-grid.html" class="item-menu-mobile ">Agencies Grid</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="agency-list.html" class="item-menu-mobile "> Agencies List</a>
+                                        </li>
+                                        <li class="menu-item ">
+                                            <a href="agency-details.html" class="item-menu-mobile "> Agencies
+                                                Details</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="menu-item"><a href="home-loan-process.html">Home Loan Process</a></li>
+                            <li class="menu-item"><a href="career.html">Career</a></li>
+                            <li class="menu-item"><a href="faq.html">Faq's</a></li>
+                            <li class="menu-item"><a href="dashboard.html">Dashboard</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-has-children-mobile">
+                    <a href="#dropdown-menu-five" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
+                        aria-expanded="true" aria-controls="dropdown-menu-five">
+                        Blogs
+                    </a>
+                    <div id="dropdown-menu-five" class="collapse" data-bs-parent="#menu-mobile-menu">
+                        <ul class="sub-mobile ">
+                            <li class="menu-item"><a href="blog-grid.html">Blog Grid</a></li>
+                            <li class="menu-item"><a href="blog-list.html">Blog List</a></li>
+                            <li class="menu-item"><a href="blog-details.html">Blog Details </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item ">
+                    <a href="contact.html" class="tem-menu-mobile "> Contact</a>
+                </li>
+            </ul>
+            <div class="support">
+                <a href="#" class="text-need"> Need help?</a>
+                <ul class="mb-info">
+                    <li>Call Us Now: <span class="number">1-555-678-8888</span></li>
+                    <li>Support 24/7: <a href="#">themesflat@gmail.com</a></li>
+                    <li>
+                        <div class="wrap-social">
+                            <p>Follow us:</p>
+                            <ul class="tf-social  style-2">
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-fb"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-X"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-linked"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-ins"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="progress-wrap">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+            style="transition: stroke-dashoffset 10ms linear; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+        </path>
+    </svg>
+</div>

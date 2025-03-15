@@ -1,0 +1,82 @@
+<div class="modal fade" id="login_register" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="login_registerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="login_registerLabel">Login / Register</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <form class="form" method="post" id="loginForm">
+          {% csrf_token %}
+          <div class="form-group mb-4">
+            <label for="username" class="sr-only">Phone Number</label>
+            <div class="input-group input-group-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-gray-01 border-0 text-muted fs-18" id="inputGroup-sizing-lg"><i class="far fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control border-0 shadow-none fs-13" id="contact" name="phone" required="" placeholder="Phone" />
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label for="password" class="sr-only">Pin</label>
+            <div class="input-group input-group-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-gray-01 border-0 text-muted fs-18"><i class="far fa-lock"></i></span>
+              </div>
+              <input type="text" class="form-control border-0 shadow-none fs-13" name="password" required="" placeholder="Password" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm btn-block">Log in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="next-process" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="next-processLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="next-processLabel">Create Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <form class="form" method="post" id="create_account">
+            {% csrf_token %}
+            <input type="hidden" name="phone" id="phone">
+
+            <div class="form-group mb-4">
+              <label for="username" class="sr-only">Full Name</label>
+              <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-gray-01 border-0 text-muted fs-18" id="inputGroup-sizing-lg"><i class="far fa-user"></i></span>
+                </div>
+                <input type="text" class="form-control border-0 shadow-none fs-13" name="name" required="" placeholder="Full Name" />
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="username" class="sr-only">Email</label>
+              <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-gray-01 border-0 text-muted fs-18" id="inputGroup-sizing-lg"><i class="far fa-user"></i></span>
+                </div>
+                <input type="email" class="form-control border-0 shadow-none fs-13" name="email" required="" placeholder="Email Id" />
+              </div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="d-block fs-13">Are you a Real Estate Agent?</label>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="agentYes" name="is_agent" class="custom-control-input" value="yes" required>
+                    <label class="custom-control-label" for="agentYes">Yes</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="agentNo" name="is_agent" class="custom-control-input" value="no" required>
+                    <label class="custom-control-label" for="agentNo">No</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm btn-block">Log in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

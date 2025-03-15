@@ -1,0 +1,50 @@
+<form class="form-advanced-search  mb-30" method="post" action="{% url 'property_search' %}">
+    {% csrf_token %}
+    <h4 class="heading-title mb-30">
+        Advanced Search
+    </h4>
+    <div class="row mb-30">
+        <div class="col-lg-7">
+            <div class="form-group">
+                <label>Search Location</label>
+                <input type="text" class="form-control" placeholder="Location" name="location" value="{{ session_data.location }}">
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-group">
+                <label>For</label>
+                <select class="form-select" name="transaction" aria-label="Default select example">
+                    <option value="buy">Buy</option>
+                    <option value="sell" selected="">Sell</option>
+                    <option value="rent">Rent</option>
+                    <option value="lease">Lease</option>
+                    <option value="invest">Invest</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    {% for category in categories %}
+        <input type="radio" class="btn-check category-radio" name="category" 
+            id="category{{ category.id }}" value="{{ category.id }}" 
+            data-subs="{{ category.subcategories.all|join:',' }}" autocomplete="off"
+            {% if category.id|stringformat:"s" == session_data.category %}checked
+                {% else %}
+                {% if forloop.first %}checked{% endif %}
+            {% endif %}>
+        <label class="btn btn-outline-dark me-2 mb-3 
+            {% if category.id|stringformat:"s" == session_data.category %}active {% endif %}" 
+            for="category{{ category.id }}">{{ category.name }}
+        </label>
+    {% endfor %}
+    
+    <hr>
+
+    <div class="fw-5 mb-3 mt-3 fs-18">Property Types</div>
+    <div id="subcategory-container" >
+        {% include 'property/load_sub_categories.html' with subcategories=categories.0.subcategories.all %}
+    </div>
+    
+    <button type="submit" class="tf-btn mt-3 bg-color-primary w-full">
+        Search Property <i class="icon-search"></i>
+    </button>
+</form>

@@ -1,0 +1,116 @@
+{% load static %}
+{% load custom_filters %}
+<header class="main-header navbar-light header-sticky header-sticky-smart header-mobile-xl">
+  <div class="sticky-area">
+    <div class="container container-xxl">
+      <nav class="navbar navbar-expand-xl px-0 w-100">
+        <a class="navbar-brand mr-7" href="{% url 'home' %}">
+          <img src="{% static 'images/logo/logo.png' %}" alt="HomeID" class="d-none d-xl-inline-block" />
+          <img src="{% static 'images/logo/logo-w.png' %}" alt="HomeID" class="d-inline-block d-xl-none" />
+        </a>
+        <div class="d-flex d-xl-none ml-auto">
+          <a class="d-block mr-4 position-relative text-white p-2" href="#">
+            <i class="fal fa-heart fs-large-4"></i>
+            <span class="badge badge-primary badge-circle badge-absolute">1</span>
+          </a>
+          <button class="navbar-toggler border-0 px-0 ml-0" type="button" data-toggle="collapse" data-target="#primaryMenu05" aria-controls="primaryMenu05" aria-expanded="false" aria-label="Toggle navigation"><span class="text-white fs-24"><i class="fal fa-bars"></i></span></button>
+        </div>
+        <div class="collapse navbar-collapse mt-3 mt-xl-0 flex-grow-0" id="primaryMenu05">
+          <ul class="navbar-nav hover-menu main-menu px-0 mx-xl-n4">
+            <li class="nav-item py-2 py-xl-5 px-0 px-xl-4">
+              <a class="nav-link p-0" href="{% url 'home' %}">
+                Home
+                <span class="caret"></span>
+              </a>
+            </li>
+            <li class="nav-item py-2 py-xl-5 px-0 px-xl-4">
+              <a class="nav-link p-0" href="{% url 'about_us' %}">
+                About us
+                <span class="caret"></span>
+              </a>
+            </li>
+            <li id="navbar-item-pages" aria-haspopup="true" aria-expanded="false" class="nav-item dropdown py-2 py-xl-5 px-0 px-xl-4">
+              <a class="nav-link dropdown-toggle p-0" href="#" data-toggle="dropdown">
+                Properties
+                <span class="caret"></span>
+              </a>
+
+              <ul class="dropdown-menu pt-3 pb-0 pb-xl-3" aria-labelledby="navbar-item-pages">
+                {% for category in property_categories %}
+                  <li class="dropdown-item dropdown dropright">
+                    <a id="navbar-link-news" class="dropdown-link dropdown-toggle" href="#" data-toggle="dropdown">{{ category.name }}</a>
+                    {% for subcategory in category.subcategories.all %}
+                      {% if subcategory.property_set.all.count > 0 %}
+                        <ul class="dropdown-menu dropdown-submenu pt-3 pb-0 pb-xl-3" aria-labelledby="navbar-link-news">
+                          <li class="dropdown-item">
+                            <a class="dropdown-link" href="{% url 'property_by_category' slug=subcategory.slug %}">{{ subcategory.name }}</a>
+                          </li>
+                        </ul>
+                      {% endif %}
+                    {% endfor %}
+                  </li>
+                {% endfor %}
+                <li class="dropdown-item">
+                  <a id="navbar-link-faqs" class="dropdown-link" href="">FAQs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="d-block d-xl-none">
+            <ul class="navbar-nav flex-row ml-auto align-items-center justify-content-lg-end flex-wrap py-2">
+              <li class="nav-item">
+                <a class="nav-link pl-3 pr-2" data-toggle="modal" href="#login_register">SIGN IN</a>
+              </li>
+              <li class="nav-item ml-auto w-100 w-sm-auto">
+                <a class="btn btn-primary btn-lg" 
+                {% if request.user.is_authenticated %}  href="{% url 'add_new_property' %}" {% else %} data-toggle="modal" href="#login_register" {% endif %} >
+                  Sell or Rent Property
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="ml-auto d-none d-xl-block">
+          <ul class="navbar-nav flex-row ml-auto align-items-center justify-content-lg-end flex-wrap py-2">
+            <li class="nav-item">
+                <a class="btn btn-lg text-heading border bg-hover-primary mr-3 border-hover-primary hover-white d-none d-lg-block" 
+                {% if request.user.is_authenticated %}  href="{% url 'add_new_property' %}" {% else %} data-toggle="modal" href="#login_register" {% endif %} >
+                  Sell or Rent Property
+                </a>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a href="#" class="dropdown-toggle d-flex align-items-center text-heading" data-toggle="dropdown">
+                  <div class="w-48px">
+                    <img src="{% static 'images/testimonial-5.jpg' %}" alt="{{ request.user.name }}" class="rounded-circle" />
+                  </div>
+                  <span class="fs-13 font-weight-500 d-none d-sm-inline ml-2">{{ request.user.name }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">My Profile</a>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </li>
+            <li class="nav-item mr-auto mr-lg-6">
+                <a class="nav-link px-2 position-relative" href="#">
+                  <i class="fal fa-heart fs-large-4"></i>
+                  <span class="badge badge-primary badge-circle badge-absolute">1</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link pl-3 pr-2 btn btn-primary btn-lg text-white" data-toggle="modal" href="#login_register">
+                  <i class="fal fa-user pr-2"></i>
+                  SIGN IN
+                </a>
+            </li>
+            {% endif %}
+            
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<a class="btn btn-primary d-none" data-toggle="modal" data-target="#next-process"></a>

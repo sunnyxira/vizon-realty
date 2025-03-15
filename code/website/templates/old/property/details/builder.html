@@ -1,0 +1,28 @@
+{% load static %}
+{% load custom_filters %}
+
+{% if property.project.builder %}
+<div class=" wg-property video spacing-2">
+    <div class="wg-title text-11 fw-6 text-color-heading">
+        Builder - {{ property.project.builder.name }}
+    </div>
+    
+    <div class="d-block">
+        <img class="lazyload" data-src="{{ property.project.builder.logo.url }}" src="{{ property.project.builder.logo.url }}" alt="{{ property.project.builder.name }}">
+        <div class="text-color-heading text-1 mt-2 fw-7">
+            About {{ property.project.builder.name }}
+        </div>
+
+        <p class="mt-2 mb-4">{{ property.project.builder.description }}</p>
+
+        {% if property.project.builder.contact_details %}
+        <div class="text-color-heading text-1 mt-2 mb-2 fw-7">
+            Contact info 
+        </div>
+        <p>
+            {{ property.project.builder.contact_details }}
+        </p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

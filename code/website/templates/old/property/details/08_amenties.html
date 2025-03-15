@@ -1,0 +1,32 @@
+{% load static %}
+{% load custom_filters %}
+
+{% if amenities_by_category.items.exists %}
+<div class="wg-property box-amenities spacing-3">
+    <div class="wg-title text-11 fw-6 text-color-heading">
+        Amenities And Features
+    </div>
+    <div class="row">
+        {% for category, amenities in amenities_by_category.items %}
+        <div class="col-lg-12">
+            <div class="amenities-header">
+                {{ category.name }}
+            </div>
+            <div class="row">
+                {% for amenity in amenities %}
+                <div class="col-lg-4">
+                    <div class="amenities-dv">
+                        {% if amenity.icon %}
+                        <img src="{{ amenity.icon.url }}" alt="{{ amenity.name }}" width="50"
+                            height="50">
+                        {{ amenity.name }}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{{ page_title|default:"Vizon Realty" }}{% endblock %}</title>
+    
+    {% block styles %}{% include 'layout/styles.html' %}{% endblock %}
+</head>
+
+<body class="popup-loader">
+    <div id="wrapper">
+        
+        {% include 'layout/head.html' %}
+        
+        {% block start %}
+        {% endblock %}
+
+        {% include 'layout/footer.html' %}
+
+    </div> 
+
+    {% block scripts %}{% include 'layout/scripts.html' %}{% endblock %}
+</body>
+</html>

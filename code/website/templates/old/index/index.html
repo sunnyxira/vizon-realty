@@ -1,0 +1,384 @@
+{% extends 'layout/base.html' %}
+{% block start %}
+{% load static %}
+{% load custom_filters %}
+{% include 'index/component/banner.html' %}
+
+<div class="main-content">
+
+    <section class="section-box-team  style-2 tf-spacing-1 pb-0 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-5">
+                    {% include 'property/advanced_search.html' %}
+                </div>
+                <div class="col-lg-7">
+                    <div class="content-inner">
+                        <div class="heading-section mb-24">
+                            <h2 class="title">Discover Spaces
+                                That Truly Feel Like Home, One Property at a Time
+                            </h2>
+                        </div>
+                        <div class="content mb-48 wow animate__fadeInUp animate__animated" data-wow-duration="1s"
+                            data-wow-delay="0s">
+                            <p class="text-1 description-1 mb-16">At Real H Realty, we focus on creating spaces that
+                                foster comfort and community. Our expertise spans across various real estate services,
+                                ensuring that each client finds the perfect fit for their needs. Join us in transforming
+                                the way you experience real estate.</p>
+                            <p class="description-2 text-1 mb-24">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad non est ex molestias
+                                delectus unde neque veniam! Sunt, ipsam repudiandae ducimus delectus, ullam blanditiis
+                                neque eum officiis fugit fuga error.
+                            </p>
+                            <a href="#"
+                                class="tf-btn bg-color-primary pd-12 fw-7 wow animate__fadeInUp animate__animated"
+                                data-wow-duration="1s" data-wow-delay="0s">Register Now</a>
+                        </div>
+                        <div class="wrap-counter">
+                            <div class="counter-item style-2">
+                                <div class="count">
+                                    <div class="icons">
+                                        <i class="icon-house"></i>
+                                    </div>
+                                    <div class="counter-number ">
+                                        <span>600</span>
+                                        <span class="sub plus">+</span>
+                                    </div>
+                                    <p class="text-4 ">Homes for Sale</p>
+                                </div>
+                            </div>
+                            <div class="counter-item style-2">
+                                <div class="count">
+                                    <div class="icons">
+                                        <i class="icon-user-2"></i>
+                                    </div>
+                                    <div class="counter-number ">
+                                        <span>250</span>
+                                        <span class="sub plus">+</span>
+                                    </div>
+                                    <p class="text-4 ">Real Estate Agents</p>
+                                </div>
+                            </div>
+                            <div class="counter-item style-2">
+                                <div class="count">
+                                    <div class="icons">
+                                        <i class="icon-shield"></i>
+                                    </div>
+                                    <div class="counter-number ">
+                                        <span>2500</span>
+                                        <span class="sub plus">+</span>
+                                    </div>
+                                    <p class="text-4 ">Properties Sold</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <section class="bg-light py-5 py-xl-8">
+        <div class="container-fluid">
+            <div class="row justify-content-md-center">
+                <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                    <h2 class="mb-4 display-8 text-center">Explore Property Categories</h2>
+                    <p class="text-secondary mb-3 text-center lead fs-6">We are committed to working with our partners
+                        and customers to develop products that make a difference in the world.</p>
+                    <hr class="w-50 mx-auto mb-5 mb-xl-5 border-dark-subtle">
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="display: none;">
+            <div class="row">
+                {% for property in properties %}
+                {% load static %}
+                {% load custom_filters %}
+                {% with property.images.first as first_image %}
+
+                <div class="col-lg-4">
+                    <img src="{{ first_image.image.url }}" width="100%">
+                    <div class="custom-d">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <span>{{ property.title }}</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <img src="{{ property.project.builder.logo.url }}" width="150">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+
+                {% endwith %}
+                {% endfor %}
+
+            </div>
+        </div>
+
+         <!-- <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-6"></div>
+                        <div class="col-lg-6"></div>
+                    </div>
+                </div> -->
+
+
+        <div class="container-fluid overflow-hidden" >
+            <div class="masonry">
+                {% for property in properties %}
+                {% load static %}
+                {% load custom_filters %}
+                {% with property.images.first as first_image %}
+                
+                <div class="grid">
+                    {{ property.project.builder.url }}
+                    <a href="{% url 'property_detail' slug=property.slug %}">
+                        <img src="{{ first_image.image.url }}">
+                    </a>
+                    <img class="masonry-logo " data-src="{{ property.project.builder.logo.url }}" src="{{ property.project.builder.logo.url }}" alt="{{ property.project.builder.name }}" width="100" height="100">
+                    
+                    <div class="grid__body">
+                        <div class="relative">
+                            <a class="grid__link"  href="{% url 'property_detail' slug=property.slug %}"></a>
+                            <h1 class="grid__title">{{ property.title }}</h1>
+                            <p class="grid__author"> {{ property.sub_category.name }} </p>
+                        </div>
+                        {% for tag in property.tags.all %}
+                        <div class="mt-auto">
+                            <!-- <span class="grid__tag text-white" style="background: {{ tag.color }}"> {{ tag.name }}</span> -->
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- <section class="section-categories-neighborhoods  tf-spacing-1">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="heading-section text-center mb-48">
+                            <h2 class="title text-anime-wave">Explore Property Categories</h2>
+                            <p class="text-1 wow animate__fadeInUp animate__animated" data-wow-duration="1.5s"
+                                data-wow-delay="0s">We connect you directly to the person that knows the
+                                most
+                                about a
+                                property for sale, the <br> listing agent.
+                            </p>
+                        </div>
+                        <div class="swiper sw-layout-3 style-pagination " data-preview="4" data-tablet="4"
+                            data-mobile-sm="2" data-mobile="1" data-space="15" data-space-md="30" data-space-lg="40"
+                            data-speed="1000">
+                            <div class="swiper-wrapper mb-48 wrap-neighborhoods">
+                                {% for hf in homefeed %}
+                                <div class="swiper-slide">
+                                    <div class="box-location h-450 hover-img ">
+                                        <div class="image-wrap">
+                                            <a href="{% url 'property_list' slug=hf.slug %}">
+                                                <img class="lazyload" data-src="{{ hf.image.url }}" src="{{ hf.image.url }}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <h6 class="text-white">{{ hf.name }}</h6>
+                                            <a href="#"
+                                                class="text-1 tf-btn style-border pd-23 text-white  tf-btn style-border pd-23">{{ hf.total_properties }}
+                                                Properties <i class="icon-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+        
+                            </div>
+                            <div class="sw-wrap-btn">
+                                <div class="swiper-button-prev sw-button layout-3-prev">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19 12H5" stroke="#5C5E61" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M12 5L5 12L12 19" stroke="#5C5E61" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="sw-pagination sw-pagination-layout-3 text-center"></div>
+                                <div class="swiper-button-next sw-button layout-3-next">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 12H19" stroke="#5C5E61" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M12 5L19 12L12 19" stroke="#5C5E61" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+  
+
+    <section class="section-listing mb-30" >
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="heading-section text-center mb-48">
+                        <h2 class="title text-anime-wave">Featured Properties</h2>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="tabs">
+                            {% for property in properties %}
+                            {% if property.project.builder %}
+                            <button class="tab-btn {% if forloop.first %}active{% endif %}" data-tab="tab-{{ forloop.counter }}">
+                                {{ property.project.builder.name }}
+                            </button>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="tab-content">
+                                {% for property in properties %}
+                                    <div class="col-lg-6">
+                                        {% if property.project.builder %}
+                                        <div id="tab-{{ forloop.counter }}" class="tab-pane {% if forloop.first %}active{% endif %}">
+                                            <div class="box-house hover-img ">
+                                                {% include 'property/common-list.html' %}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-categories style-2 tf-spacing-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="heading-section text-center mb-48">
+                        <h2 class="title text-anime-wave">Property Type </h2>
+                    </div>
+                    <div class="swiper style-pagination tf-sw-mobile-1" data-screen="576" data-preview="1"
+                        data-space="15">
+                        <div class="swiper-wrapper search-for tf-layout-mobile-sm sm-col-2 xl-col-4 lg-col-3">
+                            {% for service in services %}
+                            <div class="swiper-slide">
+                                <a href="{% url 'service_detail' service.slug %}" class="categories-item style-2">
+                                    <div class="icon-box">
+                                        <img src="{{ service.icon.url }}" alt="">
+                                    </div>
+                                    <div class="content ">
+                                        <h5>{{ service.name }}</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- {% include 'index/component/how-can-we-help.html' %}
+        {% include 'index/component/trusted-by.html' %}
+        {% include 'index/component/cta-2.html' %} -->
+
+    {% if posts %}
+    <section class="section-opinion tf-spacing-1 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="heading-section text-center mb-48">
+                        <h2 class="title text-anime-wave">Insight & Opinion</h2>
+                    </div>
+                    <div class="swiper style-pagination tf-sw-latest" data-preview="3" data-tablet="2"
+                        data-mobile-sm="2" data-mobile="1" data-space-lg="40" data-space-md="20" data-space="15">
+                        <div class="swiper-wrapper ">
+
+                            {% for post in posts %}
+                            <div class="swiper-slide">
+                                <div class="blog-article-item style-2 hover-img ">
+                                    <div class=" image-wrap ">
+                                        <a href="{% url 'blog_detail' post.slug %}">
+                                            <img class="lazyload" data-src="{{ post.image.url }}"
+                                                src="{{ post.image.url }}" alt="{{ post.title }}" width="100%"
+                                                height="200">
+                                        </a>
+                                        <div class="box-tag">
+                                            <div class="tag-item text-4 text-white fw-6">{{ post.sub_category.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="article-content">
+                                        <div class="time">
+                                            <div class="icons">
+                                                <img src="{% static 'icons/calendar.svg' %}" alt="calendar">
+                                            </div>
+                                            <p class="fw-5">{{ post.created_at }}</p>
+                                        </div>
+                                        <h4 class="title  ">
+                                            <a href="{% url 'blog_detail' post.slug %}" class="line-clamp-2">
+                                                {{ post.title }}
+                                            </a>
+                                        </h4>
+                                        <a href="{% url 'blog_detail' post.slug %}" class="tf-btn-link">
+                                            <span>
+                                                Read More
+                                            </span>
+                                            <img src="{% static 'icons/arrow-right.svg' %}" alt="arrow-right">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="sw-pagination sw-pagination-latest text-center d-lg-none d-block mt-20">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% include 'layout/scripts.html' %}
+<script>
+    $(document).ready(function () {
+        $(".category-radio").change(function () {
+            let categoryId = $(this).val();
+
+            $.ajax({
+                url: "{% url 'load_subcategories' %}",
+                data: { category_id: categoryId },
+                success: function (data) {
+                    $("#subcategory-container").html(data);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

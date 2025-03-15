@@ -1,0 +1,20 @@
+{% for sub in subcategories %}
+    <div class="form-check me-4">
+        <input class="form-check-input subcategory-checkbox" type="checkbox" name="subcategories" checked id="sub{{ sub.id }}" value="{{ sub.id }}">
+        <label class="form-check-label" for="sub{{ sub.id }}">
+            {{ sub.name }}
+        </label>
+    </div>
+{% endfor %}
+<!-- 
+{{ session_data.subcategories }}
+{% for sub in subcategories %}
+    <div class="form-check me-4">
+        <input class="form-check-input subcategory-checkbox" type="checkbox" name="subcategories" 
+            id="sub{{ sub.id }}" value="{{ sub.id }}"
+            {% if sub.id|stringformat:"s" in session_data.subcategories %}checked{% endif %}>
+        <label class="form-check-label" for="sub{{ sub.id }}">
+            {{ sub.name }}
+        </label>
+    </div>
+{% endfor %} -->

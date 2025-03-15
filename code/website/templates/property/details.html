@@ -1,0 +1,621 @@
+{% extends 'layout/base.html' %}
+{% block start %}
+{% load static %}
+{% load custom_filters %}
+ 
+
+ <section class="bg-gray-01 py-8 py-lg-0">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center py-3">
+                <li class="breadcrumb-item letter-spacing-1">
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item letter-spacing-1 active">{{ property.title | unslug }}</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<div class="primary-content bg-gray-01 pb-12">
+    <div class="container container-xxl">
+        <div class="row">
+            <article class="col-lg-9">
+                <section>
+                    <div class="galleries position-relative">
+                        <div class="position-absolute pos-fixed-top-right z-index-3">
+                            <ul class="list-inline pt-4 pr-5">
+                                <li class="list-inline-item mr-2">
+                                    <a href="#" data-toggle="tooltip" title="Favourite" class="d-flex align-items-center justify-content-center w-40px h-40 bg-white text-heading bg-hover-primary hover-white rounded-circle">
+                                        <i class="far fa-heart"></i></a>
+                                </li>
+                                <li class="list-inline-item mr-2">
+                                    <button type="button" class="btn btn-white p-0 d-flex align-items-center justify-content-center w-40px h-40 text-heading bg-hover-primary hover-white rounded-circle border-0 shadow-none">
+                                        <i class="far fa-share-alt"></i>
+                                    </button>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" data-toggle="tooltip" title="Print" class="d-flex align-items-center justify-content-center w-40px h-40 bg-white text-heading bg-hover-primary hover-white rounded-circle">
+                                        <i class="far fa-print"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="slick-slider slider-for-01 arrow-haft-inner mx-0" data-slick-options='{"slidesToShow": 1, "autoplay":false,"dots":false,"arrows":true,"asNavFor": ".slider-nav-01"}'>
+                        {% for image in property.images.all %}
+                            <div class="box px-0">
+                                <div class="item item-size-3-2">
+                                    <div class="card p-0 hover-change-image">
+                                        <a href="{{ image.image.url }}" class="card-img" data-gtf-mfp="true" data-gallery-id="04" style="background-image:url('{{ image.image.url }}')">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <div class="slick-slider slider-nav-01 mt-4 mx-n1 arrow-haft-inner" data-slick-options='{"slidesToShow": 5, "autoplay":false,"dots":false,"arrows":false,"asNavFor": ".slider-for-01","focusOnSelect": true,"responsive":[{"breakpoint": 768,"settings": {"slidesToShow": 4}},{"breakpoint": 576,"settings": {"slidesToShow": 2}}]}'>
+                        {% for image in property.images.all %}
+                            <div class="box pb-6 px-0">
+                                <div class="bg-hover-white p-1 shadow-hover-xs-3 h-100 rounded-lg">
+                                    <img src="{{ image.image.url }}" alt="{{ property.title }}" class="h-100 w-100 rounded-lg">
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </section>
+
+                <section class="pb-8 px-6 pt-5 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-3">Description</h4>
+                    <p class="mb-0 lh-214">
+                        {{ property.description }}
+                    </p>
+                </section>
+                <section class="mt-2 pb-3 px-6 pt-5 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">Facts and Features</h4>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-family fs-32 text-primary">
+                                        <use xlink:href="#icon-family"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase font-weight-normal">Type</h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">{{ property.sub_category.name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-heating fs-32 text-primary">
+                                        <use xlink:href="#icon-heating"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase font-weight-normal">Category</h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">{{ property.category.name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-year fs-32 text-primary">
+                                        <use xlink:href="#icon-year"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase font-weight-normal">year built</h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">2020</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-price fs-32 text-primary">
+                                        <use xlink:href="#icon-price"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase font-weight-normal">Configurations</h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading"> {{ property.project.configurations }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-bedroom fs-32 text-primary">
+                                        <use xlink:href="#icon-bedroom"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase font-weight-normal">Bedrooms</h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">{{ property.bedrooms }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-sofa fs-32 text-primary">
+                                        <use xlink:href="#icon-sofa"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase font-weight-normal">bathrooms</h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">{{ property.bathrooms }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="mt-2 pb-6 px-6 pt-5 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-4">Additional Details</h4>
+                    <div class="row">
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Property ID</dt>
+                            <dd>{{ property.listing_id }}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Price</dt>
+                            <dd>
+                             {% if property.is_project_based %}
+                                ₹ {{ property.project.rough_price_range|number_format }}
+                                {% else %}
+                                ₹ {{ property.price|number_format }}
+                            {% endif %}
+                            </dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Property type</dt>
+                            <dd>{{ property.sub_category }}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Property status</dt>
+                            <dd>{{ property.transaction_type|unslug }}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Rooms</dt>
+                            <dd>{{ property.bedrooms }}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Bedrooms</dt>
+                            <dd>{{ property.bedrooms }}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Size</dt>
+                            <dd>
+                                {% if property.is_project_based %}
+                                    {{ property.project.project_size|size_format }}
+                                {% else %}
+                                    {{ property.total_area|size_format }} SqFt
+                                {% endif %}
+                            </dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Bathrooms</dt>
+                            <dd>{{ property.bathrooms }}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">Year build</dt>
+                            <dd>2020</dd>
+                        </dl>
+                    </div>
+                </section>
+
+                <section class="mt-2 pb-7 px-6 pt-5 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-4">Price List</h4>
+                    <div class="table-responsive mt-4">
+                        <table width="100%" class="table table-hover border rounded-lg mb-2 bg-white" border="1" cellspacing="0" cellpadding="5">
+                            <thead class="thead-sm thead-black">
+                                <tr>
+                                    <th class="border-top-0 px-6 pt-5 pb-4 d-flex">Unit Type
+                                        <select class="offset-lg-1" id="unit">
+                                            <option value="sq.ft">Sq.Ft</option>
+                                            <option value="sq.yards">Sq.Yards</option>
+                                            <option value="sq.mt">Sq.Mt</option>
+                                            <option value="acres">Acres</option>
+                                            <option value="hectares">Hectares</option>
+                                            <option value="bigha">Bigha</option>
+                                            <option value="marla">Marla</option>
+                                            <option value="kanal">Kanal</option>
+                                        </select>
+                                    </th>
+                                    <th class="border-top-0 pt-5 pb-4">Carpet area</th>
+                                    <th class="border-top-0 pt-5 pb-4">Built up area</th>
+                                    <th class="border-top-0 pt-5 pb-4">Super built up area</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for price in property.project.price_list.all %}
+                                <tr class="shadow-hover-xs-2 bg-hover-white">
+                                    <td>{{ price.unit_type }}</td>
+                                    <td class="carpet-area" data-value="{{ price.carpet_area }}">{{
+                                        price.carpet_area }} <span class="unit">(Sq.Ft.)</span></td>
+                                    <td class="built-up-area" data-value="{{ price.built_up_area|default:'0' }}">{{
+                                        price.built_up_area|default:"N/A" }} <span class="unit">(Sq.Ft.)</span></td>
+                                    <td class="super-built-up-area" data-value="{{ price.super_built_up_area|default:'0' }}">{{
+                                        price.super_built_up_area|default:"N/A" }} <span class="unit">(Sq.Ft.)</span></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+
+                {% if amenities_by_category.items %}
+                <section class="mt-2 pb-7 px-6 pt-5 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-4">Amenities</h4>
+                    {% for category, amenities in amenities_by_category.items %}
+                    <ul class="list-unstyled mb-0 row no-gutters">
+                        {% for amenity in amenities %}
+                            <li class="col-sm-3 col-6 mb-2">
+                                {% if amenity.icon %}
+                                    <img src="{{ amenity.icon.url }}" alt="{{ amenity.name }}" width="50" height="50">
+                                {% else %}
+                                    <i class="far fa-check mr-2 text-primary"></i>
+                                {% endif %}
+                                {{ amenity.name }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </section>
+                {% endif %}
+                {% if property.project.specifications.exists %}
+                <section class="mt-2 pb-5 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-5">Specifications</h4>
+                    <div class="row">
+                        <div class="col-lg-12 border-top pt-2">
+                            {% for specs in property.project.specifications.all %}
+                            <div class="py-2 border-bottom d-sm-flex justify-content-sm-between">
+                                <div class="media align-items-sm-center d-sm-flex d-block">
+                                    <div class="mt-sm-0 mt-0">
+                                        <h4 class="my-0"><a href="#" class="lh-186 fs-15 text-heading hover-primary">{{ specs.title }}</a></h4>
+                                        <p class="lh-186 fs-15 font-weight-500 mb-0">{{ specs.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+                {% endif %}
+
+                {% if floor_plans %}
+                <section class="mt-2 pb-7 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">Floor Plans</h4>
+                    <div class="accordion accordion-03 mb-3" id="accordion-group">
+                        {% for plan in floor_plans %}
+                        <div class="card border-0 shadow-xxs-5 mb-5 bg-gray-01">
+                            <div class="card-header bg-gray-01 border-gray border-0 p-0" id="floor-plans-{{ forloop.counter }}">
+                                <div class="heading bg-gray-01 d-flex justify-content-between align-items-center px-6" 
+                                    data-toggle="collapse" 
+                                    data-target="#collapse-{{ forloop.counter }}" 
+                                    aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
+                                    aria-controls="collapse-{{ forloop.counter }}"
+                                    role="button">
+                                    <h2 class="mb-0 fs-16 text-heading font-weight-500 py-4 lh-13">{{ plan.name }}</h2>
+                                    <ul class="list-inline mb-0 d-none d-sm-block pr-2">
+                                        <li class="list-inline-item text-muted mr-4">Beds: <span class="font-weight-500 text-heading">{{ plan.beds }}</span></li>
+                                        <li class="list-inline-item text-muted mr-4">Bath: <span class="font-weight-500 text-heading">{{ plan.baths }}</span></li>
+                                        <li class="list-inline-item text-muted mr-4">Sqft: <span class="font-weight-500 text-heading">{{ plan.sqft }}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="collapse-{{ forloop.counter }}" 
+                                class="collapse {% if forloop.first %}show{% endif %} mx-6 mb-6 bg-white" 
+                                aria-labelledby="floor-plans-{{ forloop.counter }}" 
+                                data-parent="#accordion-group">
+                                <div class="card-body card-body col-sm-6 offset-sm-3 mb-3">
+                                    <img src="{{ plan.file.url }}" class="card-img" alt="{{ plan.name }}">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+
+                {% if nearby %}
+                <section class="mt-2 pb-5 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-5">What is Nearby?</h4>
+                    <div class="row">
+                        {% for place in nearby %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 text-center nearby-item">
+                            <h6 class="mb-0 mt-2">
+                                <span class="fs-16 lh-2 text-heading border-bottom border-primary pb-1">
+                                    {{ place.name|unslug }}
+                                </span>
+                            </h6>
+                            <div class="border-top pt-2">
+                                <div class="border-bottom">
+                                    <div class="text-center">
+                                        <a class="hover-shine">
+                                            <img src="{{ place.icon.url }}" class="rounded-lg w-sm-90" alt="{{ place.name }}">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+
+                {% if property.file %}
+                <section class="mt-2 pb-7 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">Property Attachments</h4>
+                    <div class="d-sm-flex">
+                    
+                        {% comment %} <div class="w-sm-170 mb-sm-0 mb-6 mr-sm-6">
+                            <div class="card text-center pt-4">
+                                <img src="{% static 'images/single-detail-property-05.png' %}" class="card-img card-img w-78px mx-auto" alt="Villa Called Archangel Word Document">
+                                <div class="card-body p-0 mt-4">
+                                    <p class="fs-13 lh-2  mb-0 py-0 px-2">Villa Called Archangel Word Document</p>
+                                    <a href="#" class="btn btn-block bg-gray-01 border-0 fs-14 text-heading">Download<i class="far fa-arrow-alt-circle-down ml-1 text-primary"></i></a>
+                                </div>
+                            </div>
+                        </div>  {% endcomment %}
+                        <div class="w-sm-170 mb-sm-0 mb-6 mr-sm-6">
+                            <div class="card text-center pt-4">
+                                <img src="{% static 'images/single-detail-property-06.png' %}" class="card-img card-img w-78px mx-auto" alt="Villa Called Archangel PDF Document">
+                                <div class="card-body p-0 mt-4">
+                                    <p class="fs-13 lh-2  mb-0 py-0 px-2">{{ property.title|unslug }}</p>
+                                    <a href="{{ property.file.url }}" class="btn btn-block bg-gray-01 border-0 fs-14 text-heading">Download<i class="far fa-arrow-alt-circle-down ml-1 text-primary"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {% endif %}
+                {% comment %} <section class="mt-2 pb-6 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">Virtual Tour</h4>
+                    <iframe height="430" src="https://my.matterport.com/show/?m=wWcGxjuUuSb&utm_source=hit-content-embed" allowfullscreen="" class="w-100"></iframe>
+                </section> {% endcomment %}
+                {% if property.get_direction %}
+                <section class="mt-2 pb-6 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">Location</h4>
+                    <div class="position-relative">
+                        {{ property.get_direction|safe }}
+                    </div>
+                </section>
+                {% endif %}
+                {% comment %} <section class="mt-2 pb-7 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">Similar Properties</h4>
+                    <div class="slick-slider" data-slick-options='{"slidesToShow": 2, "dots":false,"responsive":[{"breakpoint": 1200,"settings": {"slidesToShow":2,"arrows":false}},{"breakpoint": 992,"settings": {"slidesToShow":2}},{"breakpoint": 768,"settings": {"slidesToShow": 1}},{"breakpoint": 576,"settings": {"slidesToShow": 1}}]}'>
+                        
+                        <div class="box">
+                            <div class="card shadow-hover-2 =">
+                                <div class="hover-change-image bg-hover-overlay rounded-lg card-img-top">
+                                    <img src="images/properties-grid-01.jpg" alt="Garden Gingerbread House">
+                                    <div class="card-img-overlay p-2 d-flex flex-column">
+                                        <div>
+                                            <span class="badge mr-2 badge-orange">featured</span>
+                                            <span class="badge mr-2 badge-indigo">for Sale</span>
+                                        </div>
+                                        <ul class="list-inline mb-0 mt-auto hover-image">
+                                            <li class="list-inline-item mr-2" data-toggle="tooltip" title="9 Images">
+                                                <a href="#" class="text-white hover-primary">
+                                                    <i class="far fa-images"></i><span class="pl-1">9</span>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item" data-toggle="tooltip" title="2 Video">
+                                                <a href="#" class="text-white hover-primary">
+                                                    <i class="far fa-play-circle"></i><span class="pl-1">2</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-3">
+                                    <h2 class="card-title fs-16 lh-2 mb-0"><a href="single-property-1.html" class="text-dark hover-primary">Garden Gingerbread House</a></h2>
+                                    <p class="card-text font-weight-500 text-gray-light mb-2">1421 San Pedro St, Los Angeles</p>
+                                    <ul class="list-inline d-flex mb-0 flex-wrap mr-n4">
+                                        <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-4" data-toggle="tooltip" title="3 Bedroom">
+                                            <svg class="icon icon-bedroom fs-18 text-primary mr-1">
+                                                <use xlink:href="#icon-bedroom"></use>
+                                            </svg>3 Br
+                                        </li>
+                                        <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-4" data-toggle="tooltip" title="3 Bathrooms">
+                                            <svg class="icon icon-shower fs-18 text-primary mr-1">
+                                                <use xlink:href="#icon-shower"></use>
+                                            </svg>3 Ba
+                                        </li>
+                                        <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-4" data-toggle="tooltip" title="Size">
+                                            <svg class="icon icon-square fs-18 text-primary mr-1">
+                                                <use xlink:href="#icon-square"></use>
+                                            </svg>2300 Sq.Ft
+                                        </li>
+                                        <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-4" data-toggle="tooltip" title="1 Garage">
+                                            <svg class="icon icon-Garage fs-18 text-primary mr-1">
+                                                <use xlink:href="#icon-Garage"></use>
+                                            </svg>1 Gr
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-transparent d-flex justify-content-between align-items-center py-3">
+                                    <p class="fs-17 font-weight-bold text-heading mb-0">$550<span class="text-gray-light font-weight-500 fs-14"> / month</span></p>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            <a href="#" class="w-40px h-40 border rounded-circle d-inline-flex align-items-center justify-content-center text-body hover-secondary bg-hover-accent border-hover-accent" data-toggle="tooltip" title="Wishlist"><i class="far fa-heart"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#" class="w-40px h-40 border rounded-circle d-inline-flex align-items-center justify-content-center text-body hover-secondary bg-hover-accent border-hover-accent" data-toggle="tooltip" title="Compare"><i class="fas fa-exchange-alt"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section> {% endcomment %}
+            </article>
+            <aside class="col-lg-3 pl-xl-4 primary-sidebar sidebar-sticky" id="sidebar">
+                <div class="primary-sidebar-inner">
+                    <div class="card border-0">
+                        <div class="bg-white rounded-lg py-lg-6 pl-lg-6 pr-lg-3 p-4">
+                            <ul class="list-inline d-sm-flex align-items-sm-center mb-2">
+                                {% for tag in property.tags.all %}
+                                <li class="list-inline-item badge mr-2 text-white" style="background-color: {{ tag.color }};">{{ tag.name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <h2 class="fs-22 text-heading pt-2">{{ property.title|unslug }}</h2>
+                            <p class="mb-2"><i class="fal fa-map-marker-alt mr-1"></i>{{ property.location }}</p>
+                            <div class="d-flex align-items-center">
+                                <p class="fs-22 text-heading font-weight-bold mb-0 mr-6">
+                                    {% if property.is_project_based %}
+                                        ₹ {{ property.project.rough_price_range|number_format }}
+                                        {% else %}
+                                        ₹ {{ property.price|number_format }}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-6 mb-3">
+                                    <div class="media">
+                                        <div class="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
+                                            <svg class="icon icon-bedroom fs-18 text-primary">
+                                                <use xlink:href="#icon-bedroom"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="fs-13 font-weight-normal mb-0">Bedrooms</h5>
+                                            <p class="mb-0 fs-13 font-weight-bold text-dark">{{ property.bedrooms }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="media">
+                                        <div class="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
+                                            <svg class="icon icon-shower fs-18 text-primary">
+                                                <use xlink:href="#icon-shower"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="fs-13 font-weight-normal mb-0">Bathrooms</h5>
+                                            <p class="mb-0 fs-13 font-weight-bold text-dark">{{ property.bathrooms }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="media">
+                                        <div class="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
+                                            <svg class="icon icon-square fs-18 text-primary">
+                                                <use xlink:href="#icon-square"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="fs-13 font-weight-normal mb-0">Area</h5>
+                                            <p class="mb-0 fs-13 font-weight-bold text-dark">
+                                                {% if property.is_project_based %}
+                                                    {{ property.project.project_size|size_format }}
+                                                {% else %}
+                                                    {{ property.total_area|size_format }}Sqft
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mb-6 mt-1">
+                                {{ property.project.description }}
+                            </p>
+                            <div class="mr-xl-2">
+                                {% comment %} <a href="#" class="btn btn-outline-primary btn-lg btn-block rounded border text-body border-hover-primary hover-white">Schedule a Tour</a> {% endcomment %}
+                                <a href="#" class="btn btn-outline-primary btn-lg btn-block rounded border text-body border-hover-primary hover-white mt-4">
+                                    Request Info
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-4 border-0">
+                        <div class="bg-white pt-5 px-sm-6 shadow-xxs-2 pb-5 pt-0">
+                            <h4 class="card-title fs-16 lh-2 text-dark mb-3">Request Info</h4>
+                            <form>
+                                <div class="form-group mb-2">
+                                    <input type="text" class="form-control form-control-lg border-0" placeholder="Full Name">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="email" class="form-control form-control-lg border-0" placeholder="Your Email">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="tel" class="form-control form-control-lg border-0" placeholder="Your phone">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <textarea class="form-control border-0" rows="4">Hello, I'm interested in {{ property.title|unslug }}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block rounded">Submit</button>
+                            </form>
+                        </div>                        
+                    </div>
+                    <div class="card mt-4  mb-4">
+                        <div class="card-body text-center pt-7 pb-6 px-0">
+                          <img src="{% static 'images/contact-widget.jpg' %}" alt="Want to become an Estate Agent ?">
+                          <div class="text-dark mb-6 mt-n2 font-weight-500">Want to become an
+                            <p class="mb-0 fs-18">Agent?</p>
+                          </div>
+                          <a href="#" class="btn btn-primary">Register</a>
+                        </div>
+                      </div>
+                    <div class="card mt-4 property-widget">
+                        <div class="card-body px-6 pt-5 pb-6">
+                            <h4 class="card-title fs-16 lh-2 text-dark mb-3">Featured Properties</h4>
+                            <div class="slick-slider mx-0" data-slick-options='{"slidesToShow": 1, "autoplay":true}'>
+                                <div class="box px-0">
+                                    <div class="card border-0">
+                                        <img src="{% static 'images/feature-property-01.jpg' %}" class="card-img" alt="Villa on Hollywood Boulevard">
+                                        <div class="card-img-overlay d-flex flex-column bg-gradient-3 rounded-lg">
+                                            <div class="d-flex mb-auto">
+                                                <a href="#" class="mr-1 badge badge-orange">featured</a>
+                                                <a href="#" class="badge badge-indigo">for Rent</a>
+                                            </div>
+                                            <div class="px-2 pb-2">
+                                                <a href="single-property-1.html" class="text-white">
+                                                    <h5 class="card-title fs-16 lh-2 mb-0">Villa on Hollywood
+                                                      Boulevard</h5>
+                                                </a>
+                                                <p class="card-text text-gray-light mb-0 font-weight-500">1421 San Predro St, Los Angeles</p>
+                                                <p class="text-white mb-0"><span class="fs-17 font-weight-bold">$2500 </span>/month
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box px-0">
+                                    <div class="card border-0">
+                                        <img src="{% static 'images/feature-property-01.jpg' %}" class="card-img" alt="Villa on Hollywood Boulevard">
+                                        <div class="card-img-overlay d-flex flex-column bg-gradient-3 rounded-lg">
+                                            <div class="d-flex mb-auto">
+                                                <a href="#" class="mr-1 badge badge-orange">featured</a>
+                                                <a href="#" class="badge badge-indigo">for Rent</a>
+                                            </div>
+                                            <div class="px-2 pb-2">
+                                                <a href="single-property-1.html" class="text-white">
+                                                    <h5 class="card-title fs-16 lh-2 mb-0">Villa on Hollywood
+                                                      Boulevard</h5>
+                                                </a>
+                                                <p class="card-text text-gray-light mb-0 font-weight-500">1421 San Predro St, Los Angeles</p>
+                                                <p class="text-white mb-0"><span class="fs-17 font-weight-bold">$2500 </span>/month
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+<section>
+
+
+{% endblock %}

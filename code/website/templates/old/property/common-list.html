@@ -1,0 +1,70 @@
+{% load static %}
+{% load custom_filters %}
+
+    <div class="image-wrap">
+        {% with property.images.first as first_image %}
+            <a href="{% url 'property_detail' slug=property.slug %}">
+                {% if first_image.image %}
+                    <img class="lazyload" data-src="{{ first_image.image.url }}" src="{{ first_image.image.url }}" alt="{{ property.title }}">
+                    {% else %}
+                    <img class="lazyload" data-src="{% static 'images/samples/1.jpg' %}" src="{% static 'images/samples/1.jpg' %}" alt="{{ property.title }}">
+                {% endif %}
+            </a>
+        {% endwith %}
+        
+        <ul class="box-tag flex gap-8 ">
+            {% for tag in property.tags.all %}
+                <li class="flat-tag text-4 bg-main fw-6 text-white">
+                    {{ tag.name }}
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="list-btn flex gap-8">
+            <a href="#" class="btn-icon save hover-tooltip">
+                <i class="icon-save"></i>
+                <span class="tooltip">Add Favorite</span>
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        <span class="cat-subcat">
+            <a class="text-white" href="{% url 'property_list' slug=property.sub_category.slug %}">
+                <!-- {{ property.sub_category.category.name }} -->
+                {{ property.sub_category.name }} 
+            </a>
+        </span>
+        <h5 class="title mt-4">
+            <a href="{% url 'property_detail' slug=property.slug %}">{{ property.title }}</a>
+        </h5>
+        <p class="location text-1 line-clamp-1 ">
+            <i class="icon-location"></i> {{ property.location }}
+        </p>
+        <ul class="meta-list flex">
+            {% if property.is_project_based %}
+                <li class="text-1 flex">Project Size : <span>{{ property.project.project_size|size_format }}</span> </li>
+                {% else %}
+
+                {% if property.bedrooms %}
+                    <li class="text-1 flex"><span>{{ property.bedrooms }}</span> Beds</li>
+                {% endif %}
+                {% if property.bathrooms %}
+                    <li class="text-1 flex"><span>{{ property.bathrooms }}</span> Baths</li>
+                {% endif %}
+                <li class="text-1 flex"><span>{{ property.total_area|size_format }}</span>Sqft</li>
+            {% endif %}
+        </ul>
+        <div class="bot flex justify-between items-center">
+            <h5 class="price">
+                {% if property.is_project_based %}
+                    ₹ {{ property.project.rough_price_range|number_format }}
+
+                    {% else %}
+                    
+                    ₹ {{ property.price|number_format }}
+                {% endif %}
+            </h5>
+            <div class="wrap-btn flex">
+                <a href="{% url 'property_detail' slug=property.slug %}" class="tf-btn style-border pd-4">Details</a>
+            </div>
+        </div>
+    </div>

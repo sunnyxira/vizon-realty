@@ -1,0 +1,53 @@
+{% load static %}
+<section class="section-opinion tf-spacing-1 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="heading-section text-center mb-48">
+                    <h2 class="title text-anime-wave">Insight & Opinion</h2>
+                </div>
+                <div class="swiper style-pagination tf-sw-latest" data-preview="3" data-tablet="2" data-mobile-sm="2"
+                    data-mobile="1" data-space-lg="40" data-space-md="20" data-space="15">
+                    <div class="swiper-wrapper ">
+
+                        {% for post in posts %}
+                        <div class="swiper-slide">
+                            <div class="blog-article-item style-2 hover-img ">
+                                <div class=" image-wrap ">
+                                    <a href="{% url 'blog_detail' post.slug %}">
+                                        <img class="lazyload" data-src="{{ post.image.url }}" src="{{ post.image.url }}" alt="{{ post.title }}" width="100%" height="200">
+                                    </a>
+                                    <div class="box-tag">
+                                        <div class="tag-item text-4 text-white fw-6">{{ post.sub_category.name }}</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="time">
+                                        <div class="icons">
+                                            <img src="{% static 'icons/calendar.svg' %}" alt="calendar">
+                                        </div>
+                                        <p class="fw-5">{{ post.created_at }}</p>
+                                    </div>
+                                    <h4 class="title  ">
+                                        <a href="{% url 'blog_detail' post.slug %}" class="line-clamp-2">
+                                            {{ post.title }}
+                                        </a>
+                                    </h4>
+                                    <a href="{% url 'blog_detail' post.slug %}" class="tf-btn-link">
+                                        <span>
+                                            Read More
+                                        </span>
+                                        <img src="{% static 'icons/arrow-right.svg' %}" alt="arrow-right">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="sw-pagination sw-pagination-latest text-center d-lg-none d-block mt-20">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

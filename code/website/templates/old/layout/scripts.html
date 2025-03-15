@@ -1,0 +1,80 @@
+{% load static %}
+
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/lazysize.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/rangle-slider.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/swiper.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/magnific-popup.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/simpleParallaxVanilla.umd.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/Splitetext.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/gsap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+<script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+<script src="https://unpkg.com/isotope-packery@2.0.1/packery-mode.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@5.0.0/imagesloaded.pkgd.min.js"></script>
+<script
+    src="https://unpkg.com/bs-brain@2.0.4/components/projects/project-2/assets/controller/project-2.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll(".tab-btn");
+        const tabPanes = document.querySelectorAll(".tab-pane");
+    
+        tabButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                let tab = this.getAttribute("data-tab");
+    
+                // Remove active class from all buttons and panes
+                tabButtons.forEach(btn => btn.classList.remove("active"));
+                tabPanes.forEach(pane => pane.classList.remove("active"));
+    
+                // Add active class to the selected tab and content
+                this.classList.add("active");
+                document.getElementById(tab).classList.add("active");
+            });
+        });
+    });
+    
+</script>
+
+<script>
+    $(document).ready(function() {
+        function convertUnit(value, unit) {
+            var conversionRates = {
+                "sq.ft": 1,
+                "sq.yards": 0.111,
+                "sq.mt": 0.0929,
+                "acres": 0.0000229568,
+                "hectares": 0.0000092903,
+                "bigha": 0.0003305785,
+                "marla": 0.0229568,
+                "kanal": 0.001145
+            };
+    
+            return (value * conversionRates[unit]).toFixed(2);
+        }
+    
+        function updateTableUnits() {
+            var selectedUnit = $("#unit").val();
+    
+            $(".carpet-area, .built-up-area, .super-built-up-area").each(function() {
+                var originalValue = parseFloat($(this).attr("data-value")) || 0;
+                if (originalValue > 0) {
+                    $(this).html(convertUnit(originalValue, selectedUnit) + ' <span class="unit">(' + selectedUnit + ')</span>');
+                }
+            });
+        }
+    
+        $("#unit").change(function() {
+            updateTableUnits();
+        });
+    
+        updateTableUnits();
+    });
+    
+</script>

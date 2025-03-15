@@ -1,0 +1,262 @@
+{% extends 'layout/base.html' %}
+{% block start %}
+{% load static %}
+{% load custom_filters %}
+ 
+
+<section style="background-image: url('{% static 'images/bg-about-us.jpg' %}')" class="bg-img-cover-center py-10 pt-md-16 pb-md-17 bg-overlay">
+    <div class="container position-relative z-index-2 text-center">
+      <a href="https://www.youtube.com/watch?v=0O2aH4XLbto" class="d-inline-block m-auto position-relative play-animation" data-gtf-mfp="true" data-mfp-options='{"type":"iframe"}'>
+        <span class="text-white bg-primary w-78px h-78 rounded-circle d-flex align-items-center justify-content-center">
+          <i class="fas fa-play"></i>
+        </span>
+      </a>
+      <div class="mxw-751">
+        <h1 class="text-white fs-30 fs-md-42 lh-15 font-weight-normal mt-4 mb-10" data-animate="fadeInRight">
+            We believe in technology as a transformative force, redefining real estate with innovation, transparency, and efficiency.
+        </h1>
+      </div>
+    </div>
+  </section>
+  <section class="bg-patten-03 bg-gray-01 pb-13">
+    <div class="container">
+      <div class="card border-0 mt-n13 z-index-3 mb-12">
+        <div class="card-body p-6 px-lg-14 py-lg-13">
+          <p class="letter-spacing-263 text-uppercase text-primary mb-6 font-weight-500 text-center">welcome to
+            Vizon Realty</p>
+          <h2 class="text-heading mb-4 fs-22 fs-md-32 text-center lh-16 px-6">
+            Who We Are
+          </h2>
+          <p class="text-center px-lg-11 fs-18 lh-17 mb-11">
+            We are a team of four visionaries who came together to redefine the real estate industry through innovation and technology. Our platform is designed to make buying, selling, and listing properties easier, faster, and more transparent. With a strong foundation backed by experienced investors and a dedicated software developer, we are building a seamless ecosystem for real estate transactions.
+          </p>
+
+          <div class="row info-box-4 mt-7">
+            <div class="col-lg-6 mb-6 mb-lg-0">
+              <div class="card border-0 bg-transparent shadow-xs-2 shadow-hover-lg-1 pl-8 pr-6 py-5" data-animate="fadeInUp">
+                <div class="card-body px-0 pt-6 pb-0">
+                  <a class="text-decoration-none d-flex align-items-center justify-content-center">
+                    <h4 class="card-title fs-20 lh-1625 text-dark mb-1">
+                        Our Mission
+                    </h4>
+                    <span class="d-none d-sm-flex align-items-center ml-2 text-primary fs-42 lh-1"><svg class="icon icon-long-arrow"><use xlink:href="#icon-long-arrow"></use></svg></span>
+                  </a>
+                  <p class="card-text text-justify">
+                    Our mission is to simplify the real estate experience by providing a secure, efficient, and user-friendly platform where individuals and businesses can buy, sell, and list properties without unnecessary complications. We aim to remove the traditional barriers of real estate transactions by leveraging technology to offer seamless, hassle-free property deals.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-6 mb-lg-0">
+              <div class="card border-0 bg-transparent shadow-xs-2 shadow-hover-lg-1 pl-8 pr-6 py-5" data-animate="fadeInUp">
+                <div class="card-body px-0 pt-6 pb-0">
+                  <a class="text-decoration-none d-flex align-items-center justify-content-center">
+                    <h4 class="card-title fs-20 lh-1625 text-dark mb-1">
+                        Our Vision
+                    </h4>
+                    <span class="d-none d-sm-flex align-items-center ml-2 text-primary fs-42 lh-1"><svg class="icon icon-long-arrow"><use xlink:href="#icon-long-arrow"></use></svg></span>
+                  </a>
+                  <p class="card-text text-justify">
+                    We envision a future where real estate transactions are as simple as a few clicks. By eliminating unnecessary intermediaries and integrating advanced technology, we aim to create a marketplace where users can make informed property decisions with confidence and ease.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+        <div class="container what-we-offer">
+          <h2 class="text-heading text-center">What We Offer</h2>
+          <span class="heading-divider mx-auto mb-2"></span>
+          <div class="slick-slider arrow-haft-inner mx-0" data-slick-options='{"slidesToShow": 4, "autoplay":true,"dots":false,"responsive":[{"breakpoint": 1200,"settings": {"slidesToShow":3,"arrows":false,"dots":true}},{"breakpoint": 992,"settings": {"slidesToShow":2,"arrows":false}},{"breakpoint": 768,"settings": {"slidesToShow": 2,"arrows":false,"autoplay":true}},{"breakpoint": 576,"settings": {"arrows":false,"slidesToShow": 1}}]}'>
+            
+            <div class="box px-0 py-6" data-animate="fadeInUp">
+              <div class="card border-0 py-4 px-4 shadow-hover-3 bg-transparent bg-hover-white">
+                <div class="d-flex justify-content-center card-img-top">
+                  <img src="{% static 'images/icons/buy-sell-property.png' %}" class="border-3" alt="Buy & Sell Properties">
+                </div>
+                <div class="card-body px-0 pt-5 pb-0 text-center">
+                  <h4 class="card-title fs-16 lh-13 text-dark mb-2 px-5">Buy & Sell Properties</h4>
+                  <p class="card-text text-body px-5">A streamlined process for property transactions.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="box px-0 py-6" data-animate="fadeInUp">
+              <div class="card border-0 py-4 px-4 shadow-hover-3 bg-transparent bg-hover-white">
+                <div class="d-flex justify-content-center card-img-top">
+                  <img src="{% static 'images/icons/property-listings.png' %}" class="border-3" alt="Property Listings">
+                </div>
+                <div class="card-body px-0 pt-5 pb-0 text-center">
+                  <h4 class="card-title fs-16 lh-13 text-dark mb-2 px-5">Property Listings</h4>
+                  <p class="card-text text-body px-5">A user-friendly interface to showcase properties for sale or rent.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="box px-0 py-6" data-animate="fadeInUp">
+              <div class="card border-0 py-4 px-4 shadow-hover-3 bg-transparent bg-hover-white">
+                <div class="d-flex justify-content-center card-img-top">
+                  <img src="{% static 'images/icons/verified-listings.png' %}" class="border-3" alt="verified-listings">
+                </div>
+                <div class="card-body px-0 pt-5 pb-0 text-center">
+                  <h4 class="card-title fs-16 lh-13 text-dark mb-2 px-5">Verified Listings</h4>
+                  <p class="card-text text-body px-5">Ensuring authenticity and credibility in every deal.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="box px-0 py-6" data-animate="fadeInUp">
+              <div class="card border-0 py-4 px-4 shadow-hover-3 bg-transparent bg-hover-white">
+                <div class="d-flex justify-content-center card-img-top">
+                  <img src="{% static 'images/icons/data-driven.png' %}" class="border-3" alt="data-driven">
+                </div>
+                <div class="card-body px-0 pt-5 pb-0 text-center">
+                  <h4 class="card-title fs-16 lh-13 text-dark mb-2 px-5">Data-Driven Insights</h4>
+                  <p class="card-text text-body px-5">Smart search filters and AI-driven property recommendations.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="box px-0 py-6" data-animate="fadeInUp">
+              <div class="card border-0 py-4 px-4 shadow-hover-3 bg-transparent bg-hover-white">
+                <div class="d-flex justify-content-center card-img-top">
+                  <img src="{% static 'images/icons/secure-transaction.png' %}" class="border-3" alt="secure-transaction">
+                </div>
+                <div class="card-body px-0 pt-5 pb-0 text-center">
+                  <h4 class="card-title fs-16 lh-13 text-dark mb-2 px-5">Secure Transactions</h4>
+                  <p class="card-text text-body px-5"> A transparent system that prioritizes user trust.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      
+      <h2 class="text-dark lh-1625 text-center mb-2 fs-22 fs-md-32">Why Choose Us?</h2>
+      <p class="mxw-751 text-center mb-1 px-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim</p>
+      <div class="row mt-8">
+        <div class="col-md-4 mb-6 mb-lg-0">
+          <div class="card shadow-2 px-7 pb-6 pt-4 h-100 border-0">
+            <div class="card-img-top d-flex align-items-end justify-content-center">
+              <span class="text-primary fs-90 lh-1">🚀 </span>
+            </div>
+            <div class="card-body px-0 pt-6 pb-0 text-center">
+              <h4 class="card-title fs-18 lh-17 text-dark mb-2">Tech-Driven Innovation</h4>
+              <p class="card-text px-2">
+                A modern approach to real estate transactions.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-6 mb-lg-0">
+          <div class="card shadow-2 px-7 pb-6 pt-4 h-100 border-0">
+            <div class="card-img-top d-flex align-items-end justify-content-center">
+              <span class="text-primary fs-90 lh-1">
+                🤝
+              </span>
+            </div>
+            <div class="card-body px-0 pt-6 pb-0 text-center">
+              <h4 class="card-title fs-18 lh-17 text-dark mb-2">Trust & Transparency</h4>
+              <p class="card-text px-2">
+                No hidden charges, just fair property dealings.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-6 mb-lg-0">
+          <div class="card shadow-2 px-7 pb-6 pt-4 h-100 border-0">
+            <div class="card-img-top d-flex align-items-end justify-content-center">
+              <span class="text-primary fs-90 lh-1">
+                💡
+              </span>
+            </div>
+            <div class="card-body px-0 pt-6 text-center pb-0">
+              <h4 class="card-title fs-18 lh-17 text-dark mb-2">Investor-Backed Stability</h4>
+              <p class="card-text px-2">
+                A strong foundation for long-term reliability
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-12">
+    <div class="container">
+      <h2 class="text-dark lh-1625 text-center mb-2 fs-22 fs-md-32">Meet the Team</h2>
+      <p class="mxw-751 text-center mb-1 px-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim</p>
+      <div class="row mx-lg-n6 mt-8">
+        <div class="col-md-3 col-sm-12 mb-md-7 mb-4 px-lg-6">
+          <div class="card border our-team text-center">
+            <div class="rounded overflow-hidden d-inline-block">
+              <img class="card-img" src="{% static 'images/our-team-01.jpg' %}" alt="Person Name">
+            </div>
+            <div class="card-body pt-5">
+              <h3 class="fs-22 text-heading lh-164 mb-0">
+                <a href="#" class="text-heading hover-primary">Person Name</a>
+              </h3>
+              <p class="m-0 font-weight-500">The Visionary Founder</p>
+              <p class="fs-12">Driving the mission and shaping the company’s direction.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 mb-md-7 mb-4 px-lg-6">
+          <div class="card border-0 our-team text-center">
+            <div class="rounded overflow-hidden d-inline-block">
+              <img class="card-img" src="{% static 'images/our-team-01.jpg' %}" alt="Person Name">
+            </div>
+            <div class="card-body pt-5">
+              <h3 class="fs-22 text-heading lh-164 mb-0">
+                <a href="#" class="text-heading hover-primary">Person Name</a>
+              </h3>
+              <p class="m-0 font-weight-500">Investors & Strategists</p>
+              <p class="fs-12">Driving the mission and shaping the company’s direction.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 mb-md-7 mb-4 px-lg-6">
+          <div class="card border our-team text-center">
+            <div class="rounded overflow-hidden d-inline-block">
+              <img class="card-img" src="{% static 'images/our-team-01.jpg' %}" alt="Person Name">
+            </div>
+            <div class="card-body pt-5">
+              <h3 class="fs-22 text-heading lh-164 mb-0">
+                <a href="#" class="text-heading hover-primary">Person Name</a>
+              </h3>
+              <p class="m-0 font-weight-500">The Tech Architect</p>
+              <p class="fs-12">Developing and maintaining the platform’s technology.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 mb-md-7 mb-4 px-lg-6">
+          <div class="card border-0 our-team text-center">
+            <div class="rounded overflow-hidden d-inline-block">
+              <img class="card-img" src="{% static 'images/our-team-01.jpg' %}" alt="Person Name">
+            </div>
+            <div class="card-body pt-5">
+              <h3 class="fs-22 text-heading lh-164 mb-0">
+                <a href="#" class="text-heading hover-primary">Person Name</a>
+              </h3>
+              <p class="m-0 font-weight-500">Support & Operations</p>
+              <p class="fs-12">Ensuring a smooth experience for every user.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <h2 class="text-dark lh-1625 text-center mb-8 fs-22 fs-md-32 pt-lg-10">Our Commitment</h2>
+          <p>At our core, we are committed to simplifying real estate transactions and empowering buyers and sellers with the tools they need to make confident decisions. By continuously enhancing our platform with cutting-edge solutions, we strive to be the go-to real estate marketplace for modern property transactions.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  
+  
+
+{% endblock %}

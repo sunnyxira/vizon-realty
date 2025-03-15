@@ -1,0 +1,19 @@
+{% load static %}
+{% load custom_filters %}
+
+{% if property.project.specifications.exists %}
+<div class="wg-property box-overview ">
+
+    <div class="mt-4">
+        <div class="wg-title text-11 fw-6 text-color-heading">
+            Specifications
+        </div>
+        {% for specs in property.project.specifications.all %}
+        <b>{{ specs.title }}</b>
+        <p>{{ specs.description }}</p>
+
+        <hr>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

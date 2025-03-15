@@ -1,0 +1,22 @@
+{% load static %}
+{% load custom_filters %}
+
+<div class=" wg-property video spacing-2">
+    <div class="wg-title text-11 fw-6 text-color-heading">
+        Video
+    </div>
+    {% with property.images.first as first_image %}
+    <div class="widget-video">
+        {% if first_image.image %}
+        <img class="lazyload" data-src="{{ first_image.image.url }}"
+            src="{{ first_image.image.url }}" alt="{{ property.title }}">
+        {% else %}
+        <img class="lazyload" data-src="{% static 'images/samples/1.jpg' %}"
+            src="{% static 'images/samples/1.jpg' %}" alt="{{ property.title }}">
+        {% endif %}
+        <a href="#" class="popup-youtube">
+            <i class="icon-play"></i>
+        </a>
+    </div>
+    {% endwith %}
+</div>

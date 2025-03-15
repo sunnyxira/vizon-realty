@@ -1,0 +1,46 @@
+{% load static %}
+{% load custom_filters %}
+
+{% if property.project.price_list.exists %}
+<div class="wg-property box-overview ">
+    <div class="wg-title text-11 fw-6 text-color-heading">
+        Price List
+    </div>
+    <div class="table-responsive mt-4">
+        <table width="100%" class="table table-bordered" border="1" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <td class="bg-dark text-white d-flex" valign="middle">Unit Type
+                        <select class="ms-3" id="unit">
+                            <option value="sq.ft">Sq.Ft</option>
+                            <option value="sq.yards">Sq.Yards</option>
+                            <option value="sq.mt">Sq.Mt</option>
+                            <option value="acres">Acres</option>
+                            <option value="hectares">Hectares</option>
+                            <option value="bigha">Bigha</option>
+                            <option value="marla">Marla</option>
+                            <option value="kanal">Kanal</option>
+                        </select>
+                    </td>
+                    <td class="bg-dark text-white" valign="middle">Carpet area</td>
+                    <td class="bg-dark text-white" valign="middle">Built up area</td>
+                    <td class="bg-dark text-white" valign="middle">Super built up area</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for price in property.project.price_list.all %}
+                <tr>
+                    <td>{{ price.unit_type }}</td>
+                    <td class="carpet-area" data-value="{{ price.carpet_area }}">{{
+                        price.carpet_area }} <span class="unit">(Sq.Ft.)</span></td>
+                    <td class="built-up-area" data-value="{{ price.built_up_area|default:'0' }}">{{
+                        price.built_up_area|default:"N/A" }} <span class="unit">(Sq.Ft.)</span></td>
+                    <td class="super-built-up-area" data-value="{{ price.super_built_up_area|default:'0' }}">{{
+                        price.super_built_up_area|default:"N/A" }} <span class="unit">(Sq.Ft.)</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}

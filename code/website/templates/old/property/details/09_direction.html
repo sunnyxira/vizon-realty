@@ -1,0 +1,36 @@
+{% load static %}
+{% load custom_filters %}
+
+<div class="wg-property single-property-map spacing-9">
+    <div class="wg-title text-11 fw-6 text-color-heading">Map</div>
+
+    {{ property.get_direction|safe }}
+
+
+    <div class="info-map">
+        <ul class="box-left">
+            <li>
+                <span class="label fw-6">Address</span>
+                <div class="text text-variant-1">{{ property.location }} </div>
+            </li>
+            <li>
+                <span class="label fw-6">City</span>
+                <div class="text text-variant-1">{{ property.city.name }}</div>
+            </li>
+            <li>
+                <span class="label fw-6">State/county</span>
+                <div class="text text-variant-1">{{ property.state.name }}</div>
+            </li>
+        </ul>
+        <ul class="box-right">
+            <li>
+                <span class="label fw-6">Postal code</span>
+                <div class="text text-variant-1">{{ property.city.pincode }}</div>
+            </li>
+            <li>
+                <span class="label fw-6">Area</span>
+                <div class="text text-variant-1">{{ property.total_area|size_format }} SqFt</div>
+            </li>
+        </ul>
+    </div>
+</div>
